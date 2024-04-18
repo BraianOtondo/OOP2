@@ -6,11 +6,16 @@ public class Contacto {
 	private String email;
 	private String movil;
 	private String fijo;
-	public Contacto(long idContacto, String email, String movil, String fijo) {
-		this.idContacto = idContacto;
+	private Cliente cliente;
+	
+	public Contacto() {
+	}
+	public Contacto(String email, String movil, String fijo,Cliente cliente) {
+	
 		this.email = email;
 		this.movil = movil;
 		this.fijo = fijo;
+		this.cliente=cliente;
 	}
 	public long getIdContacto() {
 		return idContacto;
@@ -35,6 +40,12 @@ public class Contacto {
 	}
 	public void setFijo(String fijo) {
 		this.fijo = fijo;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente=cliente;
+	}
+	public Cliente getCliente() {
+		return cliente;
 	}
 	
 	public boolean equals(Contacto contacto) {

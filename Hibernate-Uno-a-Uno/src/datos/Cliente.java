@@ -10,14 +10,17 @@ public class Cliente {
 	private LocalDate fechaDeNacimiento;
 	private boolean baja;
 	private Contacto contacto;
-	public Cliente(long idCliente, String apellido, String nombre, long dni, LocalDate fechaDeNacimiento, boolean baja,
+	
+	public Cliente() {
+	}
+	public Cliente(String apellido, String nombre, long dni, LocalDate fechaDeNacimiento,
 			Contacto contacto) {
-		this.idCliente = idCliente;
+		
 		this.apellido = apellido;
 		this.nombre = nombre;
 		this.dni = dni;
 		this.fechaDeNacimiento = fechaDeNacimiento;
-		this.baja = baja;
+		this.baja = false;
 		this.contacto = contacto;
 	}
 	public long getIdCliente() {
