@@ -17,15 +17,24 @@ public class ContactoABM {
 		if(objeto!=null) {
 			throw new Exception("Ya existe un contacto en este cliente en la bdd");
 		}
-		Contacto c = new Contacto(email, movil, fijo, cliente);
-		return dao.agregar(c);
+		objeto = new Contacto(email, movil, fijo, cliente);
+		return dao.agregar(objeto);
 	}
 
-	public void modificar(Contacto c) {
+	public void modificar(Contacto c)throws Exception{
+		Contacto contacto=this.traer(c.getIdContacto());
+		if(contacto!=null) {
+			throw new Exception("El contacto que se quiere cambiar ya existe en un cliente");
+		}
+		
 		dao.actualizar(c);
 	}
 
-	public void eliminar(long idContacto) {
+	public void eliminar(long idContacto) throws Exception{
+		Contacto objeto=this.traer(idContacto);
+		if(objeto!=null) {//existe
+			throw new Exception("No se puede eliminar contacto porque tiene cliente");
+		}
 		Contacto c = dao.traer(idContacto);
 		dao.eliminar(c);
 	}

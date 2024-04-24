@@ -6,14 +6,14 @@ public class Cliente {
 	private long idCliente;
 	private String apellido;
 	private String nombre;
-	private long dni;
+	private int dni;
 	private LocalDate fechaDeNacimiento;
 	private boolean baja;
 	private Contacto contacto;
 	
 	public Cliente() {
 	}
-	public Cliente(String apellido, String nombre, long dni, LocalDate fechaDeNacimiento,
+	public Cliente(String apellido, String nombre, int dni, LocalDate fechaDeNacimiento,
 			Contacto contacto) {
 		
 		this.apellido = apellido;
@@ -41,10 +41,10 @@ public class Cliente {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public long getDni() {
+	public int getDni() {
 		return dni;
 	}
-	public void setDni(long dni) {
+	public void setDni(int dni) {
 		this.dni = dni;
 	}
 	public LocalDate getFechaDeNacimiento() {

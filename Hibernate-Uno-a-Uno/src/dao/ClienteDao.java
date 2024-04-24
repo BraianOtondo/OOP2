@@ -1,8 +1,11 @@
 package dao;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
 import datos.Cliente;
 public class ClienteDao {
 	private static Session session;
@@ -81,8 +84,8 @@ public class ClienteDao {
 		return objeto;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Cliente> traer() throws HibernateException {
+	//@SuppressWarnings("unchecked")
+	/*public List<Cliente> traer() throws HibernateException {
 		List<Cliente> lista = null;
 		try {
 			iniciaOperacion();
@@ -91,7 +94,18 @@ public class ClienteDao {
 			session.close();
 		}
 		return lista;
-	}
+	}*/
+	public List<Cliente> traer() {
+		List<Cliente> lista = new ArrayList<Cliente>();
+		try {
+		iniciaOperacion();
+		Query<Cliente> query = session.createQuery("from Cliente c order by c.idCliente ASC", Cliente.class);
+		lista = query.getResultList();
+		} finally {
+		session.close();
+		}
+		return lista;
+		}
 
 	public Cliente traerClienteYContacto(long idCliente) throws HibernateException {
 		Cliente objeto = null;
