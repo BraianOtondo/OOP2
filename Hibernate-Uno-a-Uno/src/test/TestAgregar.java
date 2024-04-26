@@ -56,6 +56,15 @@ public class TestAgregar {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
+		try {
+			abmCliente.agregar("Perez","Gustavo", 3442434,LocalDate.now(),null);
+			System.out.println("El cliente se creo con exito");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		
+		
 		System.out.println("Lista:");
 		System.out.println(abmCliente.traer());
 	}

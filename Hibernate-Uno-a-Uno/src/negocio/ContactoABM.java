@@ -31,11 +31,12 @@ public class ContactoABM {
 	}
 
 	public void eliminar(long idContacto) throws Exception{
-		Contacto objeto=this.traer(idContacto);
-		if(objeto!=null) {//existe
-			throw new Exception("No se puede eliminar contacto porque tiene cliente");
-		}
+		//Cliente c = dao.traer(idCliente);
 		Contacto c = dao.traer(idContacto);
+		if(c==null) {//existe
+			throw new Exception("No se puede eliminar porque no existe este contacto");
+		}
+		
 		dao.eliminar(c);
 	}
 }

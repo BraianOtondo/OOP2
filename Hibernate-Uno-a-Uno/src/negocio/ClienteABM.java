@@ -61,6 +61,9 @@ public class ClienteABM {
 		if (c == null) {
 			throw new Exception("El cliente no existe");
 		}
+		if(c.getContacto()!=null) {
+			throw new Exception ("No se puede eliminar cliente porque tiene un contacto");
+		}
 		dao.eliminar(c);
 	}
 
