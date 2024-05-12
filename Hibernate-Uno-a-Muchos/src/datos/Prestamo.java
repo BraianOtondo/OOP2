@@ -9,16 +9,18 @@ public class Prestamo {
 	private double interes;
 	private int cantCuotas;
 	private Cliente cliente;
+	private double monto;
 
 	public Prestamo() {
 	}
 
-	public Prestamo(LocalDate fecha, double interes, int cantCuotas, Cliente cliente) {
+	public Prestamo(LocalDate fecha, double monto, double interes, int cantCuotas, Cliente cliente) {
 		super();
 		this.fecha = fecha;
 		this.interes = interes;
 		this.cantCuotas = cantCuotas;
 		this.cliente = cliente;
+		this.monto = monto;
 	}
 
 	public long getIdPrestamo() {
@@ -27,6 +29,14 @@ public class Prestamo {
 
 	public void setIdPrestamo(long idPrestamo) {
 		this.idPrestamo = idPrestamo;
+	}
+
+	public double getMonto() {
+		return monto;
+	}
+
+	public void setMonto(double monto) {
+		this.monto = monto;
 	}
 
 	public LocalDate getFecha() {
@@ -64,7 +74,7 @@ public class Prestamo {
 	@Override
 	public String toString() {
 		return "Prestamo [idPrestamo=" + idPrestamo + ", fecha=" + fecha + ", interes=" + interes + ", cantCuotas="
-				+ cantCuotas + "]";
+				+ cantCuotas + ", monto=" + monto + "]";
 	}
 
 	public boolean equals(Prestamo prestamo) {

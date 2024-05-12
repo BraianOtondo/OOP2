@@ -50,7 +50,6 @@ public class ContactoDao {
 			tx.commit();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
-			throw he;
 		} finally {
 			session.close();
 		}
@@ -63,7 +62,6 @@ public class ContactoDao {
 			tx.commit();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
-			throw he;
 		} finally {
 			session.close();
 		}

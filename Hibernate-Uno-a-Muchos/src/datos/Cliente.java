@@ -8,7 +8,7 @@ public class Cliente {
 	private long idCliente;
 	private String apellido;
 	private String nombre;
-	private long dni;
+	private int dni;
 	private LocalDate fechaDeNacimiento;
 	private boolean baja;
 	private Set<Prestamo> prestamos;
@@ -16,7 +16,7 @@ public class Cliente {
 	public Cliente() {
 	}
 
-	public Cliente(String apellido, String nombre, long dni, LocalDate fechaDeNacimiento) {
+	public Cliente(String apellido, String nombre, int dni, LocalDate fechaDeNacimiento) {
 		super();
 		this.apellido = apellido;
 		this.nombre = nombre;
@@ -56,11 +56,11 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 
-	public long getDni() {
+	public int getDni() {
 		return dni;
 	}
 
-	public void setDni(long dni) {
+	public void setDni(int dni) {
 		this.dni = dni;
 	}
 

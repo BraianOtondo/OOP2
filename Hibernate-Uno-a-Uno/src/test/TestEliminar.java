@@ -39,10 +39,10 @@ public class TestEliminar {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
-		System.out.println("Lista 3:");
+		System.out.println("Lista 3: TRAER");
 		System.out.println(abmCliente.traer());
 		//Traer CLiente y contacto
-		System.out.println("Cliente y Contacto");
+		System.out.println("Cliente y Contacto especifico" );
 		System.out.println(abmCliente.traerClienteYContacto(1L));
 	}
 

@@ -1,21 +1,25 @@
 package dao;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import datos.Cliente;
+
 public class ClienteDao {
 	private static Session session;
 	private Transaction tx;
-	//Abre acceso a la bdd mysql
+
 	private void iniciaOperacion() throws HibernateException {
 		session = HibernateUtil.getSessionFactory().openSession();
 		tx = session.beginTransaction();
 	}
-	//Lo que sea que hizo previamente da un paso atras, Rollback. Como si no hubiera pasado nada. Las transacciiones se cancelan
+
 	private void manejaExcepcion(HibernateException he) throws HibernateException {
 		tx.rollback();
 		throw new HibernateException("ERROR en la capa de acceso a datos", he);
@@ -29,7 +33,7 @@ public class ClienteDao {
 			tx.commit();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
-			throw he;
+			// throw he;
 		} finally {
 			session.close();
 		}
@@ -61,7 +65,7 @@ public class ClienteDao {
 			session.close();
 		}
 	}
-	//Usando get de Hibernate, solo con clave primaria funciona
+
 	public Cliente traer(long idCliente) throws HibernateException {
 		Cliente objeto = null;
 		try {
@@ -72,43 +76,51 @@ public class ClienteDao {
 		}
 		return objeto;
 	}
-	//Usando HQL que trae cualquier valor especifico y directamente
 
-	public Cliente traer(int dni) {
-		Cliente cliente = null;
+	public Cliente traer(int dni) throws HibernateException {
+		Cliente objeto = null;
 		try {
-		iniciaOperacion();
-		cliente = (Cliente) session.createQuery("from Cliente c where c.dni= :dni").setParameter("dni", dni).uniqueResult();
-		// En este caso :dni es un marcador de posición para el parámetro.
-		// Al utilizar el método setParameter para asignar el valor del
-		//parámetro dni esto ayuda a prevenir la inyección de SQL.
+			iniciaOperacion();
+			objeto = (Cliente) session.createQuery("from Cliente c where c.dni=" + dni).uniqueResult();
 		} finally {
-		session.close();
+			session.close();
 		}
-		return cliente;
-		}
-	//trae la lista solamente de ese cliente especifico
+		return objeto;
+	}
+
+	// auxiliar
+	/*
+	 * public Cliente traerClienteYPrestamos(long idCliente) throws
+	 * HibernateException { Cliente objeto = null; try { iniciaOperacion(); //String
+	 * hql = "from Cliente c inner join fetch c.contacto where c.idCliente =" +
+	 * idCliente; String hql = "from Cliente c where c.idCliente="+idCliente; objeto
+	 * = (Cliente) session.createQuery(hql).uniqueResult();
+	 * Hibernate.initialize(objeto.getPrestamos()); } finally { session.close(); }
+	 * return objeto; }
+	 */
 	public List<Cliente> traer() {
 		List<Cliente> lista = new ArrayList<Cliente>();
 		try {
-		iniciaOperacion();
-		Query<Cliente> query = session.createQuery("from Cliente c order by c.idCliente ASC", Cliente.class);
-		lista = query.getResultList();
+			iniciaOperacion();
+			Query<Cliente> query = session.createQuery("from Cliente c order by c.idCliente ASC", Cliente.class);
+			lista = query.getResultList();
 		} finally {
-		session.close();
+			session.close();
 		}
 		return lista;
-		}
-		//trae cliente junto a la lista directamente con una consulta hql, para que se pueda usar esa lista
-	public Cliente traerClienteYContacto(long idCliente) throws HibernateException {
+	}
+
+	// Devuelve literal CLiente pero con listas
+	public Cliente traerClienteYPrestamos(long idCliente) throws HibernateException {
 		Cliente objeto = null;
 		try {
-		iniciaOperacion();
-		String hql = "from Cliente c inner join fetch c.contacto where c.idCliente = :idCliente";
-		objeto = (Cliente) session.createQuery(hql).setParameter("idCliente",idCliente).uniqueResult();
+			iniciaOperacion();
+			String hql = "from Cliente c where c.idCliente=:idCliente";
+			objeto = (Cliente) session.createQuery(hql).setParameter("idCliente", idCliente).uniqueResult();
+			Hibernate.initialize(objeto.getPrestamos());
 		} finally {
-		session.close();
+			session.close();
 		}
 		return objeto;
-		}
+	}
 }
