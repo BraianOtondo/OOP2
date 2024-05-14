@@ -1,11 +1,10 @@
 package datos;
 
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.Set;
 
 public class Cliente {
-	private long idCliente;
+	private int idCliente;
 	private String apellido;
 	private String nombre;
 	private int dni;
@@ -32,11 +31,11 @@ public class Cliente {
 		this.prestamos = prestamos;
 	}
 
-	public long getIdCliente() {
+	public int getIdCliente() {
 		return idCliente;
 	}
 
-	public void setIdCliente(long idCliente) {
+	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
 

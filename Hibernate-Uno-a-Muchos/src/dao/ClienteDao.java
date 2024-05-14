@@ -60,13 +60,12 @@ public class ClienteDao {
 			tx.commit();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
-			throw he;
 		} finally {
 			session.close();
 		}
 	}
 
-	public Cliente traer(long idCliente) throws HibernateException {
+	public Cliente traer(int idCliente) throws HibernateException {
 		Cliente objeto = null;
 		try {
 			iniciaOperacion();
@@ -77,7 +76,7 @@ public class ClienteDao {
 		return objeto;
 	}
 
-	public Cliente traer(int dni) throws HibernateException {
+	public Cliente traer(long dni) throws HibernateException {
 		Cliente objeto = null;
 		try {
 			iniciaOperacion();
@@ -88,16 +87,6 @@ public class ClienteDao {
 		return objeto;
 	}
 
-	// auxiliar
-	/*
-	 * public Cliente traerClienteYPrestamos(long idCliente) throws
-	 * HibernateException { Cliente objeto = null; try { iniciaOperacion(); //String
-	 * hql = "from Cliente c inner join fetch c.contacto where c.idCliente =" +
-	 * idCliente; String hql = "from Cliente c where c.idCliente="+idCliente; objeto
-	 * = (Cliente) session.createQuery(hql).uniqueResult();
-	 * Hibernate.initialize(objeto.getPrestamos()); } finally { session.close(); }
-	 * return objeto; }
-	 */
 	public List<Cliente> traer() {
 		List<Cliente> lista = new ArrayList<Cliente>();
 		try {
