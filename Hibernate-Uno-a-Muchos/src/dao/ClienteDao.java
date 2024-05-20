@@ -25,35 +25,33 @@ public class ClienteDao {
 		throw new HibernateException("ERROR en la capa de acceso a datos", he);
 	}
 
-	public int agregar(Cliente objeto) {
+	public int agregar(Cliente objeto)throws HibernateException{
 		int id = 0;
 		try {
 			iniciaOperacion();
-			id = Integer.parseInt(session.save(objeto).toString());
+			id =Integer.parseInt(session.save(objeto).toString());
 			tx.commit();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
-			// throw he;
 		} finally {
 			session.close();
 		}
 		return id;
 	}
 
-	public void actualizar(Cliente objeto) throws HibernateException {
+	public void actualizar(Cliente objeto)throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.update(objeto);
 			tx.commit();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
-			throw he;
 		} finally {
 			session.close();
 		}
 	}
 
-	public void eliminar(Cliente objeto) throws HibernateException {
+	public void eliminar(Cliente objeto)throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.delete(objeto);
@@ -65,7 +63,7 @@ public class ClienteDao {
 		}
 	}
 
-	public Cliente traer(int idCliente) throws HibernateException {
+	public Cliente traer(long idCliente) {
 		Cliente objeto = null;
 		try {
 			iniciaOperacion();
@@ -76,17 +74,18 @@ public class ClienteDao {
 		return objeto;
 	}
 
-	public Cliente traer(long dni) throws HibernateException {
+	public Cliente traer(int dni){
+		//int dni=(int) dniNegocio;
 		Cliente objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Cliente) session.createQuery("from Cliente c where c.dni=" + dni).uniqueResult();
+			objeto = (Cliente) session.createQuery("from Cliente c where c.dni=" +dni).uniqueResult();
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}
-
+	//devuelve todos los clientes
 	public List<Cliente> traer() {
 		List<Cliente> lista = new ArrayList<Cliente>();
 		try {
@@ -99,8 +98,8 @@ public class ClienteDao {
 		return lista;
 	}
 
-	// Devuelve literal CLiente pero con listas
-	public Cliente traerClienteYPrestamos(long idCliente) throws HibernateException {
+	// Devuelve literal 1 CLiente pero con listas de prestamos
+	public Cliente traerClienteYPrestamos(long idCliente) {
 		Cliente objeto = null;
 		try {
 			iniciaOperacion();

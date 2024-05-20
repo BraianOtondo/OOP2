@@ -20,6 +20,6 @@ public class TestTraer {
 		System.out.println("IMPRESION");
 		System.out.println(cliente);
 		System.out.println(cliente.getPrestamos());
-
+		
 	}
 }

@@ -80,8 +80,7 @@ public class PrestamoDao {
 		try {
 			iniciaOperacion();
 			String hQL = "from Prestamo p inner join fetch p.cliente c where c.idCliente=:idCliente";
-			lista = session.createQuery(hQL, Prestamo.class).setParameter("idCliente", c.getIdCliente())
-					.getResultList();
+			lista = session.createQuery(hQL, Prestamo.class).setParameter("idCliente", c.getIdCliente()).getResultList();
 		} finally {
 			session.close();
 		}

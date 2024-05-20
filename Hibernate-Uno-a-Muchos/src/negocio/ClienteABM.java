@@ -9,10 +9,10 @@ public class ClienteABM {
 	private ClienteDao dao = new ClienteDao();
 
 	// TRAE PERO SIN LISTA. NO SE PUEDE ACCEDER CON GET
-	public Cliente traer(int idCliente) {
+	public Cliente traer(long idCliente) {
 		return dao.traer(idCliente);
 	}
-	public Cliente traer(long dni) {
+	public Cliente traer(int dni) {
 		return dao.traer(dni);
 	}
 
@@ -27,7 +27,7 @@ public class ClienteABM {
 
 	public void modificar(Cliente cliente) throws Exception {
 		Cliente objeto=this.traer(cliente.getDni());
-			if(objeto!=null) {
+			if(objeto!=null && cliente.getIdCliente()!=(int)objeto.getIdCliente()) {//si son de id distintos y no existe ese cliente con ese ni sigo
 				throw new Exception("El cliente que quiere cambiar ya existe con ese dni");
 			}
 			dao.actualizar(cliente);
