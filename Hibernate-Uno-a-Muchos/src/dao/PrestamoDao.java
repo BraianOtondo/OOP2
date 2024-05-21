@@ -25,7 +25,7 @@ public class PrestamoDao {
 		throw new HibernateException("ERROR en la capa de acceso a datos", he);
 	}
 
-	public int agregar(Prestamo objeto) {
+	public int agregar(Prestamo objeto) throws HibernateException {
 		int id = 0;
 		try {
 			iniciaOperacion();
@@ -39,7 +39,7 @@ public class PrestamoDao {
 		return id;
 	}
 
-	public void actualizar(Prestamo objeto) {
+	public void actualizar(Prestamo objeto)throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.update(objeto);

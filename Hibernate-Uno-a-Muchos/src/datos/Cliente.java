@@ -82,7 +82,7 @@ public class Cliente {
 	@Override
 	public String toString() {
 		return "Cliente [idCliente=" + idCliente + ", apellido=" + apellido + ", nombre=" + nombre + ", dni=" + dni
-				+ ", fechaDeNacimiento=" + fechaDeNacimiento + ", baja=" + baja + "]";
+				+ ", fechaDeNacimiento=" + fechaDeNacimiento + ", baja=" + baja + "]\n";
 	}
 
 	public boolean equals(Cliente cliente) {

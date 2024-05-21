@@ -1,6 +1,7 @@
 package datos;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 public class Cliente {
 	private long idCliente;
@@ -9,6 +10,7 @@ public class Cliente {
 	private int dni;
 	private LocalDate fechaDeNacimiento;
 	private boolean baja;
+	private Set<Prestamo> prestamos;
 	public Cliente(String apellido, String nombre, int dni, LocalDate fechaDeNacimiento) {
 		super();
 		this.apellido = apellido;
@@ -51,6 +53,13 @@ public class Cliente {
 	}
 	public void setBaja(boolean baja) {
 		this.baja = baja;
+	}
+	
+	public Set<Prestamo> getPrestamos() {
+		return prestamos;
+	}
+	public void setPrestamos(Set<Prestamo> prestamos) {
+		this.prestamos = prestamos;
 	}
 	public boolean equals(Cliente cliente) {
 

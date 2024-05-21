@@ -1,6 +1,7 @@
 package negocio;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import dao.ClienteDao;
 import datos.Cliente;
@@ -36,6 +37,18 @@ public class ClienteABM {
 	// TRAE CON LISTA. SE PUEDE ACCEDER CON GET
 	public Cliente traerClienteYPrestamos(long idCliente) {
 		return dao.traerClienteYPrestamos(idCliente);
+	}
+	public List<Cliente> traerClientesPorApellido(String apellido){
+		return dao.traer(apellido);
+	}
+	public List<Cliente> traerClientesEnRangoCumpleanio(LocalDate fechaDesde, LocalDate fechaHasta){
+		return dao.traer(fechaDesde, fechaHasta);
+	}
+	public List<Cliente>traerClientesAbiertoFechaCumpleaño(LocalDate fechaDesde,LocalDate fechaHasta){
+		return dao.traerFechaAbierto(fechaDesde, fechaHasta);
+	}
+	public List<Cliente>traerPorFechaPrestamo(LocalDate fecha){
+		return dao.traerFechaDePrestamo(fecha);
 	}
 
 }
